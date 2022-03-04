@@ -2,6 +2,7 @@
 const inquirer = require("inquirer");
 
 const fs = require("fs");
+const generateMarkdown = require("./utils/generateMarkdown");
 
 // TODO: Create an array of questions for user input
 //questions to add:
@@ -74,17 +75,7 @@ const genInfo = () => {
     },
     // if(genInfo.addContributors){
     //     return genInfo.contributors
-    // }
-  ]);
-};
-const projDesc = () => {
-  console.log(`
-    =================
-    The following questions will be
-    used to generate your Project Description:
-    =================
-    `);
-  return inquirer.prompt([
+
     {
       type: "input",
       name: "motivation",
@@ -97,7 +88,7 @@ const projDesc = () => {
     },
     {
       type: "input",
-      name: "problemSolve",
+      name: "problem",
       message: "What problem does it solve/what need does it address?",
     },
     {
@@ -107,18 +98,27 @@ const projDesc = () => {
     },
   ]);
 };
+const projDesc = () => {};
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+  fs.writeFile("readme.md", data, function (err, results) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("File written successfully!");
+    }
+  });
+}
 
 // TODO: Create a function to initialize app
 function init() {}
 
 // Function call to initialize app
-genInfo()
-  .then(projDesc)
-  .then((writeReadMe) => {
-    console.log(genInfo, projDesc);
-  });
+genInfo().then((answers) => {
+  console.log(answers);
+  const markdown = generateMarkdown(answers);
+});
+// .then((writeToFile) => {});
 
 init();
