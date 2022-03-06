@@ -40,7 +40,7 @@ function generateMarkdown(data) {
   >
 
   ## PREVIEW
-  > 
+  > ![Screenshot of Usage]()
 `;
 }
 
