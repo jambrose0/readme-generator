@@ -73,8 +73,6 @@ const genInfo = () => {
       message: "Would you like to add another contributor?",
       default: "false,",
     },
-    // if(genInfo.addContributors){
-    //     return genInfo.contributors
 
     {
       type: "input",
@@ -102,23 +100,31 @@ const projDesc = () => {};
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-  fs.writeFile("readme.md", data, function (err, results) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("File written successfully!");
-    }
+  fs.writeFile("readme.md", data, (err) => {
+    if (err) throw err;
+    console.log("The file has been saved!");
   });
 }
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+  // return generateMarkdown(data);
+}
 
 // Function call to initialize app
-genInfo().then((answers) => {
-  console.log(answers);
-  const markdown = generateMarkdown(answers);
-});
-// .then((writeToFile) => {});
+genInfo()
+  .then((answers) => {
+    console.log(answers);
+    const markdown = generateMarkdown(answers);
+  })
+  .then((writeTemplate) => {
+    return fs.writeToFile(writeTemplate);
+  });
 
 init();
+
+// writeToFile("readme.md", writeToFile, (err) => {
+//   if (err) throw err;
+//   console.log("The file has been saved!");
+// });
+// });

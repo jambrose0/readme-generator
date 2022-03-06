@@ -15,16 +15,17 @@ function generateMarkdown(data) {
   return `
   # ${data.title}
   ## DESCRIPTION
-    `` ${data.motivation} ${data.build} ${data.problem} ${data.learn}  ``
+   >  ${data.motivation} ${data.build} ${data.problem} ${data.learn}  
   ## INSTALLATION
-    ``${data.installation}``
+   > ${data.installation}
   ## USAGE
-    ``${data.usage}``
+  ${data.usage}
   ## LANGUAGES & TECHNOLOGIES
-    ``${data.languages} and ${data.technologies}``
+   > ${data.languages} and ${data.technologies}
   ## AUTHOR(S)
     -github.com/${data.contributors}
   ## LICENSE
+  >
 `;
 }
 
