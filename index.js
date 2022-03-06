@@ -4,19 +4,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const generateMarkdown = require("./utils/generateMarkdown");
 
-// TODO: Create an array of questions for user input
-//questions to add:
-//Table of Contents(optional)- on my end? template literal?
-//credits (collaborators, 3rd party assets, etc)
-//features
-//maybe unnecessary below:
-//how to contribute
-//badges(wtf are they?)
-//license
-
-//tests
-// const questions = [];
-const genInfo = () => {
+const genInfo = (data) => {
   return inquirer.prompt([
     {
       type: "input",
@@ -96,15 +84,28 @@ const genInfo = () => {
     },
   ]);
 };
-const projDesc = () => {};
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-  fs.writeFile("readme.md", data, (err) => {
-    if (err) throw err;
-    console.log("The file has been saved!");
+const writeToFile = (fileContent, data) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile("./dist/readme.md", fileContent, (err) => {
+      if (err) {
+        rejects(err);
+        return;
+      }
+      resolve({
+        ok: true,
+        message: "File created!",
+      });
+    });
   });
-}
+};
+// function writeToFile(fileName, data) {
+//   fs.writeFile("readme.md", data, (err) => {
+//     if (err) throw err;
+//     console.log("The file has been saved!");
+//   });
+// }
 
 // TODO: Create a function to initialize app
 function init() {
@@ -115,11 +116,25 @@ function init() {
 genInfo()
   .then((answers) => {
     console.log(answers);
-    const markdown = generateMarkdown(answers);
   })
-  .then((writeTemplate) => {
-    return fs.writeToFile(writeTemplate);
+  .then((generatePage) => {
+    return writeToFile(fileContent, data);
   });
+
+// genInfo().then((answers) => {
+//   console.log(answers);
+//   const markdown = generateMarkdown(answers);
+// });
+// .then((writeTemplate) => {
+//   return fs.writeToFile(writeTemplate);
+// });
+// genInfo().then((answers) => {
+//   console.log(answers);
+// });
+// fs.writeFile("readme.md", generateMarkdown(data), (err) => {
+//   if (err) throw err;
+//   console.log("Your ReadMe has been generated!");
+// });
 
 init();
 
@@ -128,3 +143,5 @@ init();
 //   console.log("The file has been saved!");
 // });
 // });
+
+// module.exports(markdown);
