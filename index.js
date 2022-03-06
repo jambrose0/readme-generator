@@ -1,5 +1,6 @@
 // TODO: Include packages needed for this application
 const inquirer = require("inquirer");
+const path = require("path");
 
 const fs = require("fs");
 const generateMarkdown = require("./utils/generateMarkdown");
@@ -52,7 +53,12 @@ const genInfo = (data) => {
     },
     {
       type: "input",
-      name: "contributors",
+      name: "name",
+      message: "Type a name of any authors (including yourself):",
+    },
+    {
+      type: "input",
+      name: "authors",
       message: "Type one github username of any authors (including yourself):",
     },
     {
@@ -85,63 +91,16 @@ const genInfo = (data) => {
   ]);
 };
 
-// TODO: Create a function to write README file
-const writeToFile = (fileContent, data) => {
-  return new Promise((resolve, reject) => {
-    fs.writeFile("./dist/readme.md", fileContent, (err) => {
-      if (err) {
-        rejects(err);
-        return;
-      }
-      resolve({
-        ok: true,
-        message: "File created!",
-      });
-    });
-  });
-};
-// function writeToFile(fileName, data) {
-//   fs.writeFile("readme.md", data, (err) => {
-//     if (err) throw err;
-//     console.log("The file has been saved!");
-//   });
-// }
+function writeToFile(fileName, data) {
+  return fs.writeFileSync(path.join(process.cwd(), fileName), data);
+}
 
 // TODO: Create a function to initialize app
 function init() {
-  // return generateMarkdown(data);
+  genInfo().then((inquirerResponses) => {
+    console.log("Generating README....");
+    writeToFile("/dist/README.md", generateMarkdown({ ...inquirerResponses }));
+  });
 }
 
-// Function call to initialize app
-genInfo()
-  .then((answers) => {
-    console.log(answers);
-  })
-  .then((generatePage) => {
-    return writeToFile(fileContent, data);
-  });
-
-// genInfo().then((answers) => {
-//   console.log(answers);
-//   const markdown = generateMarkdown(answers);
-// });
-// .then((writeTemplate) => {
-//   return fs.writeToFile(writeTemplate);
-// });
-// genInfo().then((answers) => {
-//   console.log(answers);
-// });
-// fs.writeFile("readme.md", generateMarkdown(data), (err) => {
-//   if (err) throw err;
-//   console.log("Your ReadMe has been generated!");
-// });
-
 init();
-
-// writeToFile("readme.md", writeToFile, (err) => {
-//   if (err) throw err;
-//   console.log("The file has been saved!");
-// });
-// });
-
-// module.exports(markdown);
