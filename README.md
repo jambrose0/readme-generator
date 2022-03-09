@@ -1,23 +1,23 @@
-# ReadMe Generator
+# README Generator
 
 ## DESCRIPTION
 
-> Writing clear descriptions of my programs can be daunting.
-> With this program, I can focus more on the coding and less on the describing.
-> By answering question prompts I am able to focus on small bites of the README and less on a whole picture.
-> This project helped me gain a stronger understanding of node.js and JavaScript.
+> To streamline the writing of README's.
+> By streamlining, I am able to focus more on the coding aspect of projects.
+> Often I have writers' block while writing descriptions and other aspects of my README's.
+> I learned a stronger understanding of Node.js and some of it's packages.
 
 ## INSTALLATION
 
-> No installation, personal use only.
+>
 
 ## USAGE
 
-By answering question prompts in the command line.
+By responding to question prompts in the command line.
 
 ## LANGUAGES & TECHNOLOGIES
 
-> Node and npm: inquirer
+> JavaScript,ES6,Node and npm package: inquirer
 
 ## AUTHOR(S)
 
@@ -27,8 +27,6 @@ By answering question prompts in the command line.
   >
 
 ## LICENSE
-
->
 
 ## PREVIEW
 
