@@ -1,4 +1,3 @@
-// TODO: Include packages needed for this application
 const inquirer = require("inquirer");
 const path = require("path");
 
@@ -51,22 +50,6 @@ const genInfo = (data) => {
       message:
         "Feel free to add any additional technologies you may have used:",
     },
-    {
-      type: "input",
-      name: "name",
-      message: "Type a name of any authors (including yourself):",
-    },
-    {
-      type: "input",
-      name: "authors",
-      message: "Type one github username of any authors (including yourself):",
-    },
-    {
-      type: "confirm",
-      name: "addContributors",
-      message: "Would you like to add another contributor?",
-      default: "false,",
-    },
 
     {
       type: "input",
@@ -88,6 +71,28 @@ const genInfo = (data) => {
       name: "learn",
       message: "What did you learn?",
     },
+    {
+      type: "input",
+      name: "name",
+      message: "Type a name of any authors (including yourself):",
+    },
+    {
+      type: "input",
+      name: "authors",
+      message: "Type one github username of any authors (including yourself):",
+    },
+    {
+      type: "confirm",
+      name: "addContributors",
+      message: "Would you like to add another contributor?",
+      default: "false,",
+    },
+    {
+      type: "checkbox",
+      name: "license",
+      message: "Which license would you like to add to your README",
+      choices: ["GNU", "Apache", "MIT", "None"],
+    },
   ]);
 };
 
@@ -95,7 +100,6 @@ function writeToFile(fileName, data) {
   return fs.writeFileSync(path.join(process.cwd(), fileName), data);
 }
 
-// TODO: Create a function to initialize app
 function init() {
   genInfo().then((inquirerResponses) => {
     console.log("Generating README....");
